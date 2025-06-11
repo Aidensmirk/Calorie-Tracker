@@ -16,7 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from calorietracker import views  
+from calorietracker import views, auth_views 
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,4 +25,9 @@ urlpatterns = [
     path('add/', views.add_item, name='add_item'),
     path('delete/<int:item_id>/', views.delete_item, name='delete_item'),
     path('reset/', views.reset_items, name='reset_items'),
+    path('login/', auth_views.login_view, name='login'),
+    path('logout/', auth_views.logout_view, name='logout'),
+    path('register/', auth_views.register_view, name='register'),
 ]
+
+urlpatterns += staticfiles_urlpatterns()
